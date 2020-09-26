@@ -1,0 +1,82 @@
+'''
+Author : Padmavathi
+project requirement:
+program : This program converts string, url, html &.docx files into pdf file!
+'''
+
+import mammoth
+import pdfkit
+
+class ConvertPDF:
+    def __init__(self):
+        self.pdf_string()
+        self.pdf_url()
+        self.pdf_html()
+        self.docx_to_pdf_text()
+        self.docx_to_pdf_html()
+        pass
+
+    def pdf_string(self):
+        pdfkit.from_string('Hello World', 'Hello.pdf')
+
+    def pdf_url(self):
+        pdfkit.from_url('https://micropyramid.com/', 'micro.pdf')
+
+    def pdf_html(self):
+        pdfkit.from_file('P.html', 'Phtml.pdf')
+
+    def docx_to_pdf_text(self):
+        with open("P1.docx", "rb") as docx_file:
+            result = mammoth.extract_raw_text(docx_file)
+            text = result.value  # The generated HTML
+            print(text)
+            messages = result.messages
+            print(messages)
+            print("successful")
+            # html_file = html + ".html"
+
+        options = {
+            "page-size": "Letter",
+            "margin-top": "0.75in",
+            "margin-right": "0.75in",
+            "margin-bottom": "0.75in",
+            "margin-left": "0.75in",
+            "encoding": "UTF-8",
+            "custom-header": [("Accept-Encoding", "gzip")],
+            "cookie": [
+                ("cookie-name1", "cookie-value1"), ("cookie-name2", "cookie-value2")
+            ],
+            "outline-depth": 10,
+        }
+        pdfkit.from_string(text, "pdf_text.pdf", options=options)
+
+    def docx_to_pdf_html(self):
+
+        with open("P1.docx", "rb") as docx_file:
+            result = mammoth.convert_to_html(docx_file)
+            html = result.value  # The generated HTML
+            messages = result.messages
+            print(messages)
+            print("successful")
+            htmlstr = str(html)
+
+        options = {
+            "page-size": "Letter",
+            "margin-top": "0.75in",
+            "margin-right": "0.75in",
+            "margin-bottom": "0.75in",
+            "margin-left": "0.75in",
+            "encoding": "UTF-8",
+            "custom-header": [("Accept-Encoding", "gzip")],
+            "cookie": [
+                ("cookie-name1", "cookie-value1"), ("cookie-name2", "cookie-value2")
+            ],
+            "outline-depth": 10,
+        }
+        pdfkit.from_string(htmlstr, "pdf_html.pdf", options=options)
+
+
+pdf = ConvertPDF()
+print("Convert to PDF files are Successful！")
+
+
