@@ -1,0 +1,56 @@
+'''
+Author : Padmavathi
+project requirement:
+program : Simple program converts object into JSON Serilization and Deserialization
+'''
+import json
+
+class PersonJson:
+
+    def __init__(self):
+        self.person1()
+        self.person2()
+        pass
+
+    def person1(self):
+        #object
+        person = {
+            'first_name': "Ajay",
+            "isAlive": True,
+            "age": 42,
+            "address": {
+                "s"
+                "treetAddress": "Kanteel Street",
+                "city": "Amsterdam",
+                "state": "NL",
+                "postalCode": "10021-3100"
+            },
+            "hasMortgage": None
+        }
+        ##convert object to json
+        data = json.dumps(person, sort_keys=True, indent=3)  # serialize
+        print(data)
+
+        ## now we are gonna convert json to object
+        data1 = '{"hasMortgage": null, "isAlive": true, "age": 42, "address": {"state": "NL", "streetAddress": "KanteelStreet", "city": "Amsterdam", "postalCode": "10021-3100"}, "first_name": "Ajay"}'
+        person = json.loads(data1)  # deserialize from string
+        print(person)
+
+    def person2(self):
+        print('serialization')
+        myDictObj = {"name": "Vijay", "age": 40, "car": None}
+        ##convert object to json
+        serialized = json.dumps(myDictObj, sort_keys=True, indent=3)
+        print(serialized)
+
+        ## now we are gonna convert json to object
+        print("Deserialization")
+        deserialization = json.loads(serialized)
+        print(deserialization)
+
+        ##now we are writing into an output file with person.txt
+        with open('person.txt', 'w') as json_file:
+            json.dump(myDictObj, json_file)
+
+
+P = PersonJson()
