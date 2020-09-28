@@ -1,0 +1,54 @@
+'''
+@Padmavathi Vempadi
+15th Sept 2020
+class that handles all functions related to mobile app through which user or customer can see the status of the appliance connected.
+'''
+
+from tkinter import *
+import tkinter as tk
+from appliances.programme_menu import programmes
+from PIL import ImageTk,Image
+
+root = Tk()
+root.title('Python Mobile Simulator')
+root.geometry('{}x{}'.format(380, 250))
+
+
+selected_pgm = "1.Daily Wash"
+
+class Application(tk.Frame):
+
+    def __init__(self, master):
+       super().__init__(master)
+       self.master = master
+       self.imgfile()
+       self.main_containers()
+
+
+    def imgfile(self):
+        self.canvas = Canvas(self.master, width=70, height=50)
+        self.canvas.pack()
+
+        self.img = ImageTk.PhotoImage(Image.open("C:/Users/jobs4/Desktop/homeapp.jpg"))
+        self.canvas.create_image(20, 20, anchor=NW, image=self.img)
+        self.canvas.place(x=250, y=0)
+
+
+    # create all of the main containers
+    def main_containers(self):
+        self.selected_pgm = StringVar()
+        self.selected_pgm = programmes().show_program_menu()
+
+
+        label1 = Label(self.master, text='Online Devices', background = "cyan", font=("Arial", 10, "bold")).place(x=50,y=40)
+
+        label2 = Label(self.master, text='List of Devices\nwith Status\n(Online/Offline', background = "cyan", font=("Arial", 10, "bold")).place(x=50,y=100)
+        label3 = Label(self.master, text='Remaining Time', background="cyan", font=("Arial", 10, "bold")).place(x=200, y=70)
+        label4 = Label(self.master, text='Selected Program :', background="cyan", font=("Arial", 10, "bold")).place(x=200, y=100)
+        label4_1 = Label(self.master, text=self.selected_pgm, background="light pink", font=("Arial", 8,)).place(x=200, y=120)
+        label5 = Label(self.master, text='Invoice Balance', background="cyan", font=("Arial", 10, "bold")).place(x=200, y=150)
+
+
+
+app = Application(root)
+root.mainloop()
