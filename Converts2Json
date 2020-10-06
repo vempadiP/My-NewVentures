@@ -1,7 +1,7 @@
 '''
 Author : Padmavathi
 project requirement:
-program : Simple program converts object into JSON Serilization and Deserialization
+program : Simple program converts object into JSON Serilization or encoding and Deserialization or Decoding
 '''
 import json
 
@@ -27,11 +27,11 @@ class PersonJson:
             },
             "hasMortgage": None
         }
-        ##convert object to json
+        ##convert object to json : serialization or Encoding
         data = json.dumps(person, sort_keys=True, indent=3)  # serialize
         print(data)
 
-        ## now we are gonna convert json to object
+        ## now we are gonna convert json to object : deserialization or decoding
         data1 = '{"hasMortgage": null, "isAlive": true, "age": 42, "address": {"state": "NL", "streetAddress": "KanteelStreet", "city": "Amsterdam", "postalCode": "10021-3100"}, "first_name": "Ajay"}'
         person = json.loads(data1)  # deserialize from string
         print(person)
